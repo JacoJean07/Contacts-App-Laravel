@@ -1,0 +1,10 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap | when u need change theme, change [theme] to your theme name example darkly
+@import "~bootswatch/dist/Lux/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/Lux/bootswatch";
