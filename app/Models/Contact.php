@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+
 class Contact extends Model
 {
     use HasFactory;
@@ -14,6 +16,8 @@ class Contact extends Model
     // csrf en la base de datos
     protected $fillable = [
         'name',
-        'phone_number'
+        'phone_number',
+        'email',
+        'age',
     ];
 }
