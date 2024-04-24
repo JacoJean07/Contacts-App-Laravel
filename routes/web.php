@@ -30,3 +30,6 @@ Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit'])->name
 Route::put('/contacts/{contact}', [ContactController::class, 'update'])->name('contacts.update');
 // se esta creando una ruta para el metodo store del controlador ContactController
 Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
+// se esta creando una ruta para el metodo destroy del controlador ContactController
+Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+
