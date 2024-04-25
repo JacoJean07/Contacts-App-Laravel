@@ -12356,3 +12356,15 @@ pre {
     background-size: cover;
 }
 
+.img-responsive {
+    width: 60%;
+}
+
+@media (max-width: 768px) { /* 768px es el punto de interrupción para md en Bootstrap */
+    .img-responsive {
+        width: 100%;
+    }
+    .contact-name{
+        padding-left: 18%;
+    }
+}

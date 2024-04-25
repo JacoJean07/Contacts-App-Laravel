@@ -7,7 +7,8 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             Contact info
-            <a href="{{ route('home') }}" class="btn btn-primary ml-auto">Go back</a>
+            {{-- se utiliza la funcion global url y previous para conseguir ir atras desde la pagina de la que se ingresa al show --}}
+            <a href="{{ url()->previous() }}" class="btn btn-primary ml-auto">Go back</a>
           </div>
 
           <div class="card-body">
