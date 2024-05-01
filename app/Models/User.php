@@ -41,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    // definimos la relacion de un usuario con sus contactos
+    public function contacts()
+    {
+        // se tiene que especificar que un usuario tiene muchos contactos
+        return $this->hasMany(Contact::class); 
+        //ocupa el modelo de contacto y le une el _id automaticamente para buscar la foreign key
+        // en este caso se busca la foreign key user_id en la tabla de contactos
+    }
 }

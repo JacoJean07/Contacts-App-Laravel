@@ -14,7 +14,9 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('contacts.index', ['contacts' => Contact::all()]);
+        $contacts = auth()->user()->contacts;
+
+        return view('contacts.index', compact('contacts'));
     }
 
     /**
@@ -41,9 +43,8 @@ class ContactController extends Controller
             'email' => 'required|email',
             'age' => 'required|integer|min:1|max:130',
         ]);
-        // se crea el contacto con los datos validados y se retorna un mensaje de que se creo el contacto
-        // esto se hace para que no se pueda inyectar codigo en la base de datos asi que es seguro!
-        Contact::create($data);
+
+        auth()->user()->contacts()->create($data);
 
         return redirect()->route('home')->with('message', 'Contact created successfully!');
     }
