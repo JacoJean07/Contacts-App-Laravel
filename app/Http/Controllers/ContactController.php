@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreContactRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -35,16 +37,9 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreContactRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string',
-            'phone_number' => 'required|digits_between:10,15',
-            'email' => 'required|email',
-            'age' => 'required|integer|min:1|max:130',
-        ]);
-
-        auth()->user()->contacts()->create($data);
+        auth()->user()->contacts()->create($request->validated());
 
         return redirect()->route('home')->with('message', 'Contact created successfully!');
     }
@@ -55,7 +50,7 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(Contact $contact)
+    public function show(Contact $contact) 
     {
         $this->authorize('view', $contact);
 
@@ -84,19 +79,11 @@ class ContactController extends Controller
      */
     //injeccion de dependencias es cuando se pasa un objeto como parametro a un metodo
     // en este caso se esta pasando un objeto de tipo Contact
-    public function update(Request $request, Contact $contact)
+    public function update(StoreContactRequest $request, Contact $contact)
     {
         $this->authorize('update', $contact);
 
-        $data = $request->validate([
-            'name' => 'required|string',
-            'phone_number' => 'required|digits_between:10,15',
-            'email' => 'required|email',
-            'age' => 'required|integer|min:1|max:130',
-        ]);
-        // como ya nos pasan el contacto con la inyeccion de dependencias podemos hacer update directamente
-        // con los datos validados
-        $contact->update($data);
+        $contact->update($request->validated());
 
         return redirect()->route('home')->with('message', 'Contact updated successfully!');
     }
