@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('email');
             $table->tinyInteger('age', false, true);
+            // para hacer una foreign key puedes especificar al modelo al cual se relaciona
+            // y asi laravel se encargara de hacer la relacion
             $table->foreignIdFor(User::class);
             $table->timestamps();
         });

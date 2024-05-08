@@ -57,6 +57,8 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
+        $this->authorize('view', $contact);
+
         return view('contacts.show', compact('contact'));
     }
 
@@ -84,6 +86,8 @@ class ContactController extends Controller
     // en este caso se esta pasando un objeto de tipo Contact
     public function update(Request $request, Contact $contact)
     {
+        $this->authorize('update', $contact);
+
         $data = $request->validate([
             'name' => 'required|string',
             'phone_number' => 'required|digits_between:10,15',
@@ -105,6 +109,8 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
+        $this->authorize('delete', $contact);
+
         $contact->delete();
 
         return redirect()->route('home');
