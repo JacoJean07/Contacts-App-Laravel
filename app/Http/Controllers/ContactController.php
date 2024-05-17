@@ -39,9 +39,11 @@ class ContactController extends Controller
      */
     public function store(StoreContactRequest $request)
     {
-        auth()->user()->contacts()->create($request->validated());
+        $contact = auth()->user()->contacts()->create($request->validated());
 
-        return redirect()->route('home')->with('message', 'Contact created successfully!');
+        session()->flash('alert', ['message' => "Contact $contact->name successfully saved", 'type' => 'success']);
+
+        return redirect()->route('home');
     }
 
     /**
@@ -50,7 +52,7 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(Contact $contact) 
+    public function show(Contact $contact)
     {
         $this->authorize('view', $contact);
 
@@ -85,7 +87,10 @@ class ContactController extends Controller
 
         $contact->update($request->validated());
 
-        return redirect()->route('home')->with('message', 'Contact updated successfully!');
+        return redirect('home')->with('alert', [
+            'message' => "Contact $contact->name successfully updated", 
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -100,6 +105,9 @@ class ContactController extends Controller
 
         $contact->delete();
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('alert', [
+            'message' => "Contact $contact->name successfully deleted", 
+            'type' => 'success'
+        ]);
     }
 }

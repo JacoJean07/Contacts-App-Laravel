@@ -12344,8 +12344,6 @@ pre {
 .img-thumbnail {
   border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
 }
-
-
 .welcome {
     position: absolute;
     top: 0;
@@ -12360,11 +12358,19 @@ pre {
     width: 60%;
 }
 
-@media (max-width: 768px) { /* 768px es el punto de interrupción para md en Bootstrap */
+.alert-icon {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 768px) {
+
+    /* 768px es el punto de interrupción para md en Bootstrap */
     .img-responsive {
         width: 100%;
     }
-    .contact-name{
+
+    .contact-name {
         padding-left: 18%;
     }
 }
